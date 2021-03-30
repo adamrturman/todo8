@@ -6,11 +6,12 @@ import Item from "../Item/Item";
 interface TodoListProps {
     list: Todo[];
     deleteTodo: (index: number) => void;
+    handleComplete: (index: number) => void;
 }
 
 export default function TodoList (props: TodoListProps) {
 
-    const { list, deleteTodo } = props;
+    const { list, deleteTodo, handleComplete } = props;
 
     const displayedList = list.map((todo: Todo, index: number) => (
         // <li>{toDo.text}</li>
@@ -18,6 +19,7 @@ export default function TodoList (props: TodoListProps) {
             todo={todo}
             index={index}
             deleteTodo={deleteTodo}
+            handleComplete={handleComplete}
         />
     ));
 
