@@ -18,7 +18,7 @@ export default function Item (props: ItemProps) {
     return (
         <>
             <ListItem key={index}>{todo.text}</ListItem>
-            <DeleteForever onClick={removeToDo}/>
+            <DeleteForever data-testid={`${todo.text} deleteIcon`} onClick={removeToDo}/>
         </>
     )
 }
