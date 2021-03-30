@@ -26,5 +26,17 @@ test('todo is added to list and input is cleared', () => {
     addAToDo(input, "get bread", addButton);
 
     expect(getByText("get bread")).toBeInTheDocument();
-    expect(inputValue).toBe("")
+    expect(inputValue).toBe("");
+});
+
+test('clicking the remove icon deletes that todo', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+
+    addAToDo(input, "get bread", addButton)
+    const getBreadText = queryByText("get bread");
+    fireEvent.click(getByTestId("get bread deleteIcon"));
+
+    expect(getBreadText).not.toBeInTheDocument();
 });

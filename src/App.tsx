@@ -15,11 +15,19 @@ function App() {
       setList([...list, toDoToAdd]);
     };
 
+    const deleteTodo = (index: number) => {
+      const listAfterDeletion = list.filter((todo: Todo, i: number) => i !== index);
+      setList(listAfterDeletion);
+    };
+
   return (
     <div className="App">
       Todo 8
         <InputArea createTodoToAdd={createTodoToAdd} />
-        <TodoList list={list} />
+        <TodoList
+            list={list}
+            deleteTodo={deleteTodo}
+        />
     </div>
   );
 }
