@@ -20,6 +20,16 @@ function App() {
       setList(listAfterDeletion);
     };
 
+    const handleComplete = (index: number) => {
+      const listAfterCompletion = list.map((todo: Todo, i: number) => {
+          if (i === index) {
+              todo.isCompleted = !todo.isCompleted;
+          }
+          return todo;
+      });
+      setList(listAfterCompletion);
+    };
+
   return (
     <div className="App">
       Todo 8
@@ -27,6 +37,7 @@ function App() {
         <TodoList
             list={list}
             deleteTodo={deleteTodo}
+            handleComplete={handleComplete}
         />
     </div>
   );
