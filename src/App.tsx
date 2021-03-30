@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import Todo from "./interfaces/Todo";
 import InputArea from "./components/InputArea/InputArea";
+import TodoList from "./components/TodoList/TodoList";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
@@ -17,7 +18,8 @@ function App() {
   return (
     <div className="App">
       Todo 8
-        <InputArea />
+        <InputArea createTodoToAdd={createTodoToAdd} />
+        <TodoList list={list} />
     </div>
   );
 }
