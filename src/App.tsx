@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import Todo from "./interfaces/Todo";
 import InputArea from "./components/InputArea/InputArea";
@@ -7,6 +7,7 @@ import Banner from "./components/Banner/Banner";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
+    const [currentTask, setCurrentTask] = useState<Todo>({text: '', isCompleted: false})
 
     const createTodoToAdd = (task: string) => {
         const hasDuplicate = list.reduce((haveSeenDuplicate, todo) => {
@@ -48,6 +49,10 @@ function App() {
       setList(listAfterCompletion);
     };
 
+    const handleEditChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setCurrentTask({text: event.target.value, isCompleted: false});
+    };
+
     const countRemainingTodos = () => {
       return list.reduce((count, todo) => {
           if (!todo.isCompleted) {
@@ -57,15 +62,28 @@ function App() {
       }, 0)
     };
 
+    const handleSave = (index: number, task: string) => {
+      const listAfterEdit = list.map((todo: Todo, i: number ) => {
+          if (i === index) {
+              todo.text = task
+          }
+          return todo;
+      });
+      setList([...listAfterEdit]);
+    };
+
   return (
     <div className="App">
       <Banner countRemainingTodos={countRemainingTodos} />
         <InputArea createTodoToAdd={createTodoToAdd} />
         <TodoList
+            currentTask={currentTask}
             list={list}
             deleteTodo={deleteTodo}
             handleComplete={handleComplete}
             countRemainingTodos={countRemainingTodos}
+            handleSave={handleSave}
+            handleEditChange={handleEditChange}
         />
     </div>
   );

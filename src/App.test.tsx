@@ -98,7 +98,7 @@ test('adding todos correctly increments the displayed count', () => {
 });
 
 test('checking boxes decrements the displayed count', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
 
@@ -109,4 +109,20 @@ test('checking boxes decrements the displayed count', () => {
     addAToDo(input, "get milk", addButton);
 
     getByText("There are 2 tasks remaining.");
+});
+
+test('editing and saving an existing todo', () => {
+    const { getByLabelText, getByText,getByTestId,queryByText } = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+
+    addAToDo(input, "get bread", addButton);
+    const editOrSaveButton = getByTestId("get bread-edit-save-button");
+    fireEvent.click(editOrSaveButton);
+    const changeField = getByTestId("get bread-input");
+    fireEvent.change(changeField, { target: { value: "get milk"}});
+    fireEvent.click(editOrSaveButton);
+
+    expect(getByText("get milk")).toBeInTheDocument();
+    expect(queryByText("get bread")).not.toBeInTheDocument();
 });
