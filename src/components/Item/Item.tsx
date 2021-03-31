@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from "react";
 import Todo from "../../interfaces/Todo";
 import styles from "./Item.module.css"
 import DeleteForever from '@material-ui/icons/DeleteForever';
-import {TextField, Typography, Button, Checkbox, ListItem} from "@material-ui/core";
+import {Typography, Button, Checkbox, ListItem} from "@material-ui/core";
 
 interface ItemProps {
     todo: Todo;
@@ -40,12 +40,12 @@ export default function Item (props: ItemProps) {
             <ListItem className={`${styles.list} ${styles.listItem}`} key={index}>
                  <DeleteForever data-testid={`${todo.text} deleteIcon`} onClick={removeToDo}/>
                 {isEditable ?
-                    <TextField label={todo.text} onChange={handleEditChange}/>
+                    <input data-testid={`${todo.text}-input`} onChange={handleEditChange}/>
                     :
                     <Typography className={itemStyleClasses}>{todo.text}</Typography>
                 }
                     <Checkbox data-testid={`${todo.text}-checkbox`} onClick={toggleComplete} />
-                    <Button onClick={editOrSaveAction}>{editOrSaveText}</Button>
+                    <Button data-testid={`${todo.text}-edit-save-button`} onClick={editOrSaveAction}>{editOrSaveText}</Button>
 
             </ListItem>
         </>

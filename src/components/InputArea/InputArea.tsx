@@ -28,7 +28,7 @@ export default function InputArea(props: InputAreaProps) {
                 <div>
                     <label htmlFor="input">Add a Todo to the list</label>
                 </div>
-                <TextField id="input" value={task} variant="outlined" onChange={handleChange} />
+                <TextField data-testid="input" id="input" value={task} variant="outlined" onChange={handleChange} />
                 <Button variant="contained" onClick={addToList}>Click to add</Button>
                 </div>
         </Card>
