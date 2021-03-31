@@ -1,14 +1,33 @@
-import React, {useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import './App.css';
 import Todo from "./interfaces/Todo";
 import InputArea from "./components/InputArea/InputArea";
 import TodoList from "./components/TodoList/TodoList";
+import Banner from "./components/Banner/Banner";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
+    const [currentTask, setCurrentTask] = useState<Todo>({text: '', isCompleted: false});
 
     const createTodoToAdd = (task: string) => {
-      const toDoToAdd: Todo = {
+        const hasDuplicate = list.reduce((haveSeenDuplicate, todo) => {
+            if (task === todo.text) {
+                haveSeenDuplicate = true;
+            }
+            return haveSeenDuplicate;
+        }, false);
+
+        if (hasDuplicate) {
+            alert("Duplicate todos not allowed");
+            return;
+        }
+
+        if (!task.length){
+            alert("Blank todos not allowed.");
+            return;
+        }
+
+        const toDoToAdd: Todo = {
           text: task,
           isCompleted: false
       };
@@ -30,14 +49,41 @@ function App() {
       setList(listAfterCompletion);
     };
 
+    const handleEditChange = (event: ChangeEvent<HTMLInputElement>) => {
+      setCurrentTask({text: event.target.value, isCompleted: false});
+    };
+
+    const countRemainingTodos = () => {
+      return list.reduce((count, todo) => {
+          if (!todo.isCompleted) {
+              count++;
+          }
+          return count;
+      }, 0);
+    };
+
+    const handleSave = (index: number, task: string) => {
+      const listAfterEdit = list.map((todo: Todo, i: number ) => {
+          if (i === index) {
+              todo.text = task;
+          }
+          return todo;
+      });
+      setList([...listAfterEdit]);
+    };
+
   return (
     <div className="App">
-      Todo 8
+      <Banner countRemainingTodos={countRemainingTodos} />
         <InputArea createTodoToAdd={createTodoToAdd} />
         <TodoList
+            currentTask={currentTask}
             list={list}
             deleteTodo={deleteTodo}
             handleComplete={handleComplete}
+            countRemainingTodos={countRemainingTodos}
+            handleSave={handleSave}
+            handleEditChange={handleEditChange}
         />
     </div>
   );

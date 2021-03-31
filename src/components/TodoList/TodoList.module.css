@@ -1,0 +1,17 @@
+.listCard {
+    width: 40rem;
+    margin: 2rem auto;
+    min-height: 20rem;
+}
+
+.listCard.listCardGreenBackground {
+    background-color: green;
+}
+
+.listCard.listCardYellowBackground {
+    background-color: yellow;
+}
+
+.listCard.listCardRedBackground {
+    background-color: red;
+}
