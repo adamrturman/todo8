@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
 import Todo from "../../interfaces/Todo";
-import styles from "./Item.module.css"
+import styles from "./Item.module.css";
 import DeleteForever from '@material-ui/icons/DeleteForever';
 import {Typography, Button, Checkbox, ListItem} from "@material-ui/core";
 
@@ -28,7 +28,7 @@ export default function Item (props: ItemProps) {
     const saveEdit = () => {
         setIsEditable(false);
         handleSave(index, currentTask.text);
-    }
+    };
 
     const editOrSaveAction = isEditable ? saveEdit : makeEditable;
     const editOrSaveText = isEditable ? 'Save' : 'Edit';

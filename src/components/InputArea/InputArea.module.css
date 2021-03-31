@@ -3,3 +3,7 @@
     margin: 5rem auto auto;
     min-height: 10rem;
 }
+
+.inputAreaWrapper {
+    padding: 2rem;
+}
