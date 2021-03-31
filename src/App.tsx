@@ -3,6 +3,7 @@ import './App.css';
 import Todo from "./interfaces/Todo";
 import InputArea from "./components/InputArea/InputArea";
 import TodoList from "./components/TodoList/TodoList";
+import Banner from "./components/Banner/Banner";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
@@ -47,9 +48,18 @@ function App() {
       setList(listAfterCompletion);
     };
 
+    const countRemainingTodos = () => {
+      return list.reduce((count, todo) => {
+          if (!todo.isCompleted) {
+              count++;
+          }
+          return count;
+      }, 0)
+    };
+
   return (
     <div className="App">
-      Todo 8
+      <Banner countRemainingTodos={countRemainingTodos} />
         <InputArea createTodoToAdd={createTodoToAdd} />
         <TodoList
             list={list}
