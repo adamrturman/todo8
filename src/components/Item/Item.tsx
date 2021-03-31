@@ -1,25 +1,37 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import Todo from "../../interfaces/Todo";
 import styles from "./Item.module.css"
-import ListItem from '@material-ui/core/ListItem';
 import DeleteForever from '@material-ui/icons/DeleteForever';
-import Checkbox from '@material-ui/core/Checkbox';
-import {Typography} from "@material-ui/core";
+import {TextField, Typography, Button, Checkbox, ListItem} from "@material-ui/core";
 
 interface ItemProps {
     todo: Todo;
     index: number;
     deleteTodo: (index: number) => void;
     handleComplete: (index: number) => void;
+    handleSave: (index: number, task: string) => void;
+    handleEditChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    currentTask: Todo;
 }
 
 export default function Item (props: ItemProps) {
+    const [isEditable, setIsEditable] = useState<boolean>(false);
 
-    const { todo, index, deleteTodo, handleComplete } = props;
+    const { todo, index, deleteTodo, handleComplete, handleSave, handleEditChange, currentTask } = props;
 
     const removeToDo = () => deleteTodo(index);
 
     const toggleComplete = () => handleComplete(index);
+
+    const makeEditable = () => setIsEditable(true);
+
+    const saveEdit = () => {
+        setIsEditable(false);
+        handleSave(index, currentTask.text);
+    }
+
+    const editOrSaveAction = isEditable ? saveEdit : makeEditable;
+    const editOrSaveText = isEditable ? 'Save' : 'Edit';
 
     const itemStyleClasses = todo.isCompleted ? `${styles.completed}` : ``;
 
@@ -27,8 +39,14 @@ export default function Item (props: ItemProps) {
         <>
             <ListItem className={`${styles.list} ${styles.listItem}`} key={index}>
                  <DeleteForever data-testid={`${todo.text} deleteIcon`} onClick={removeToDo}/>
-                 <Typography className={itemStyleClasses}>{todo.text}</Typography>
+                {isEditable ?
+                    <TextField label={todo.text} onChange={handleEditChange}/>
+                    :
+                    <Typography className={itemStyleClasses}>{todo.text}</Typography>
+                }
                     <Checkbox data-testid={`${todo.text}-checkbox`} onClick={toggleComplete} />
+                    <Button onClick={editOrSaveAction}>{editOrSaveText}</Button>
+
             </ListItem>
         </>
     );

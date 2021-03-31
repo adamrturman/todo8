@@ -1,4 +1,4 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import styles from "./TodoList.module.css"
 import List from '@material-ui/core/List';
 import Todo from "../../interfaces/Todo";
@@ -10,11 +10,14 @@ interface TodoListProps {
     deleteTodo: (index: number) => void;
     handleComplete: (index: number) => void;
     countRemainingTodos: () => number;
+    handleSave: (index: number, task: string) => void;
+    handleEditChange: (event: ChangeEvent<HTMLInputElement>) => void;
+    currentTask: Todo;
 }
 
 export default function TodoList (props: TodoListProps) {
 
-    const { list, deleteTodo, handleComplete, countRemainingTodos } = props;
+    const { list, deleteTodo, handleComplete, countRemainingTodos, handleSave, handleEditChange, currentTask } = props;
 
     let listClasses = styles.listCard;
 
@@ -33,10 +36,13 @@ export default function TodoList (props: TodoListProps) {
     const displayedList = list.map((todo: Todo, index: number) => (
         <Item
             todo={todo}
+            currentTask={currentTask}
             index={index}
             key={index}
             deleteTodo={deleteTodo}
             handleComplete={handleComplete}
+            handleSave={handleSave}
+            handleEditChange={handleEditChange}
         />
     ));
 
