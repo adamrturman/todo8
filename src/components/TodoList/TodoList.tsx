@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import styles from "./TodoList.module.css"
+import styles from "./TodoList.module.css";
 import List from '@material-ui/core/List';
 import Todo from "../../interfaces/Todo";
 import Item from "../Item/Item";
@@ -22,15 +22,15 @@ export default function TodoList (props: TodoListProps) {
     let listClasses = styles.listCard;
 
     if (countRemainingTodos() > 0) {
-        listClasses += ` ${styles.listCardGreenBackground}`
+        listClasses += ` ${styles.listCardGreenBackground}`;
     }
 
     if (countRemainingTodos() > 2) {
-        listClasses += ` ${styles.listCardYellowBackground}`
+        listClasses += ` ${styles.listCardYellowBackground}`;
     }
 
     if (countRemainingTodos() > 3) {
-        listClasses += ` ${styles.listCardRedBackground}`
+        listClasses += ` ${styles.listCardRedBackground}`;
     }
 
     const displayedList = list.map((todo: Todo, index: number) => (
@@ -52,5 +52,5 @@ export default function TodoList (props: TodoListProps) {
                 {displayedList}
             </List>
         </Card>
-    )
+    );
 }

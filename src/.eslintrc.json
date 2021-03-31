@@ -18,6 +18,7 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/array-type": "off",
     "@typescript-eslint/no-object-literal-type-assertion": "off",
-    "no-multiple-empty-lines": "error"
+    "no-multiple-empty-lines": "error",
+    "semi": [2, "always"]
   }
 }

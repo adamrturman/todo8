@@ -7,7 +7,7 @@ import Banner from "./components/Banner/Banner";
 
 function App() {
     const [list, setList] = useState<Todo[]>([]);
-    const [currentTask, setCurrentTask] = useState<Todo>({text: '', isCompleted: false})
+    const [currentTask, setCurrentTask] = useState<Todo>({text: '', isCompleted: false});
 
     const createTodoToAdd = (task: string) => {
         const hasDuplicate = list.reduce((haveSeenDuplicate, todo) => {
@@ -59,13 +59,13 @@ function App() {
               count++;
           }
           return count;
-      }, 0)
+      }, 0);
     };
 
     const handleSave = (index: number, task: string) => {
       const listAfterEdit = list.map((todo: Todo, i: number ) => {
           if (i === index) {
-              todo.text = task
+              todo.text = task;
           }
           return todo;
       });

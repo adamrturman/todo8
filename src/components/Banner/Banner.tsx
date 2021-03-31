@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Banner.module.css"
+import styles from "./Banner.module.css";
 import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 
