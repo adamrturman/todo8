@@ -8,7 +8,24 @@ function App() {
     const [list, setList] = useState<Todo[]>([]);
 
     const createTodoToAdd = (task: string) => {
-      const toDoToAdd: Todo = {
+        const hasDuplicate = list.reduce((haveSeenDuplicate, todo) => {
+            if (task === todo.text) {
+                haveSeenDuplicate = true;
+            }
+            return haveSeenDuplicate;
+        }, false);
+
+        if (hasDuplicate) {
+            alert("Duplicate todos not allowed");
+            return;
+        }
+
+        if (!task.length){
+            alert("Blank todos not allowed.");
+            return;
+        }
+
+        const toDoToAdd: Todo = {
           text: task,
           isCompleted: false
       };
