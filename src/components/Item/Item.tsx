@@ -25,7 +25,7 @@ export default function Item (props: ItemProps) {
 
     return (
         <>
-            <ListItem className={itemStyleClasses} key={index}>
+            <ListItem className={`${styles.list} ${styles.listItem}`} key={index}>
                  <DeleteForever data-testid={`${todo.text} deleteIcon`} onClick={removeToDo}/>
                  <Typography className={itemStyleClasses}>{todo.text}</Typography>
                     <Checkbox data-testid={`${todo.text}-checkbox`} onClick={toggleComplete} />
