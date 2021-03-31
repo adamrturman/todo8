@@ -65,6 +65,7 @@ function App() {
             list={list}
             deleteTodo={deleteTodo}
             handleComplete={handleComplete}
+            countRemainingTodos={countRemainingTodos}
         />
     </div>
   );
