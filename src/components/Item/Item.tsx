@@ -28,7 +28,7 @@ export default function Item (props: ItemProps) {
             <ListItem className={itemStyleClasses} key={index}>
                  <DeleteForever data-testid={`${todo.text} deleteIcon`} onClick={removeToDo}/>
                  <Typography className={itemStyleClasses}>{todo.text}</Typography>
-                    <Checkbox onClick={toggleComplete} />
+                    <Checkbox data-testid={`${todo.text}-checkbox`} onClick={toggleComplete} />
             </ListItem>
         </>
     );

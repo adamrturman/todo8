@@ -66,3 +66,47 @@ test('blank todos are not allowed', () => {
 
     expect(window.alert).toHaveBeenCalledTimes(1);
 });
+
+test('banner text not displayed when count is 0', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+    const bannerText = getByTestId("count-remaining");
+
+    expect(bannerText.innerHTML).toBe("");
+
+    addAToDo(input, "get bread", addButton);
+    expect(bannerText.innerHTML).toBe("There is 1 task remaining.");
+
+    fireEvent.click(getByTestId("get bread-checkbox"));
+
+    expect(bannerText.innerHTML).toBe("");
+});
+
+test('adding todos correctly increments the displayed count', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+
+    addAToDo(input, "get bread", addButton);
+
+    getByText("There is 1 task remaining.");
+
+    addAToDo(input, "get milk", addButton);
+
+    getByText("There are 2 tasks remaining.");
+});
+
+test('checking boxes decrements the displayed count', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+
+    addAToDo(input, "get bread", addButton);
+
+    getByText("There is 1 task remaining.");
+
+    addAToDo(input, "get milk", addButton);
+
+    getByText("There are 2 tasks remaining.");
+});
