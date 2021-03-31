@@ -43,3 +43,26 @@ test('clicking the remove icon deletes that todo', () => {
 
     expect(getBreadText).not.toBeInTheDocument();
 });
+
+test('duplicate todos are not allowed', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+    window.alert = jest.fn();
+
+    addAToDo(input, "get bread", addButton);
+    addAToDo(input, "get bread", addButton);
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+});
+
+test('blank todos are not allowed', () => {
+    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const input = getByLabelText("Add a Todo to the list");
+    const addButton = getByText("Click to add");
+    window.alert = jest.fn();
+
+    addAToDo(input, "", addButton);
+
+    expect(window.alert).toHaveBeenCalledTimes(1);
+});
