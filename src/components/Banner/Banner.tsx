@@ -21,7 +21,7 @@ export default function Banner(props: BannerProps) {
     return (
         <>
             <Typography variant="h1">Todo 8</Typography>
-            <Typography variant="h2">{remainingTodosText}</Typography>
+            <Typography data-testid="count-remaining" variant="h2">{remainingTodosText}</Typography>
         </>
 
     );
