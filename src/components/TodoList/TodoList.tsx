@@ -18,6 +18,7 @@ export default function TodoList (props: TodoListProps) {
         <Item
             todo={todo}
             index={index}
+            key={index}
             deleteTodo={deleteTodo}
             handleComplete={handleComplete}
         />

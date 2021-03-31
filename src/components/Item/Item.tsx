@@ -31,5 +31,5 @@ export default function Item (props: ItemProps) {
                     <Checkbox onClick={toggleComplete} />
             </ListItem>
         </>
-    )
+    );
 }
