@@ -72,6 +72,11 @@ function App() {
       setList([...listAfterEdit]);
     };
 
+    const clearAllCompleted = () => {
+      const listAfterClearingCompleted = list.filter(todo => !todo.isCompleted);
+      setList(listAfterClearingCompleted);
+    };
+
   return (
     <div className="App">
       <Banner countRemainingTodos={countRemainingTodos} />
@@ -84,6 +89,7 @@ function App() {
             countRemainingTodos={countRemainingTodos}
             handleSave={handleSave}
             handleEditChange={handleEditChange}
+            clearAllCompleted={clearAllCompleted}
         />
     </div>
   );
