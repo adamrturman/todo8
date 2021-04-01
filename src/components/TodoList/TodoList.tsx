@@ -20,11 +20,11 @@ export default function TodoList (props: TodoListProps) {
 
     const { list, deleteTodo, handleComplete, countRemainingTodos, handleSave, handleEditChange, currentTask, clearAllCompleted } = props;
 
-    let listClasses = styles.listCard;
-
     const numberOfRemainingTodos = countRemainingTodos();
 
     const numberOfCompletedTodos = list.length - numberOfRemainingTodos;
+
+    let listClasses = styles.listCard;
 
     if (numberOfRemainingTodos > 0) {
         listClasses += ` ${styles.listCardGreenBackground}`;
