@@ -69,7 +69,7 @@ function App() {
           }
           return todo;
       });
-      setList([...listAfterEdit]);
+      setList(listAfterEdit);
     };
 
     const clearAllCompleted = () => {

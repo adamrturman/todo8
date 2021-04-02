@@ -5,7 +5,7 @@ import App from './App';
 const addAToDo = (input: HTMLElement, text: string, button: HTMLElement) => {
     fireEvent.change(input, { target: {value: text }});
     fireEvent.click(button);
-}
+};
 
 test('renders title', () => {
     const { getByText } = render(<App />);
@@ -24,14 +24,14 @@ test('todo is added to list and input is cleared', () => {
     const inputValue = input.innerHTML;
 
     addAToDo(input, "get bread", addButton);
-    const getBreadText = queryByText("get bread")
+    const getBreadText = queryByText("get bread");
 
     expect(getBreadText).toBeInTheDocument();
     expect(inputValue).toBe("");
 });
 
 test('clicking the remove icon deletes that todo', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText, getByTestId } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
 
@@ -45,7 +45,7 @@ test('clicking the remove icon deletes that todo', () => {
 });
 
 test('duplicate todos are not allowed', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
     window.alert = jest.fn();
@@ -57,7 +57,7 @@ test('duplicate todos are not allowed', () => {
 });
 
 test('blank todos are not allowed', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
     window.alert = jest.fn();
@@ -68,7 +68,7 @@ test('blank todos are not allowed', () => {
 });
 
 test('banner text not displayed when count is 0', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText, getByTestId } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
     const bannerText = getByTestId("count-remaining");
@@ -84,7 +84,7 @@ test('banner text not displayed when count is 0', () => {
 });
 
 test('adding todos correctly increments the displayed count', () => {
-    const { getByLabelText, getByText, getByTestId, queryByText} = render(<App />);
+    const { getByLabelText, getByText } = render(<App />);
     const input = getByLabelText("Add a Todo to the list");
     const addButton = getByText("Click to add");
 
