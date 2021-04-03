@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Running Units Tests
+    name: Running Units Tests & Linting
     runs-on: ubuntu-latest
 
     steps:
@@ -19,3 +19,5 @@ jobs:
       run: npm install
     - name: Test
       run: npm test
+    - name: Lint
+      run: npm run lint
