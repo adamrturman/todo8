@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    name: Running Units Tests and Linting
+    name: Running Units Tests & Linting
     runs-on: ubuntu-latest
 
     steps:
